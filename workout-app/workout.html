@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Workout exercises</title>
+  </head>
+  <body>
+    <button id="returnBtn">Go back</button>
+    <section>
+      <form id="workoutForm">
+        <legend class="workout-exercise-title"></legend>
+        <ul class="workout-exercises"></ul>
+        <button id="submitWorkout" disabled>Finish workout</button>
+      </form>
+      <section class="progress-indicator"></section>
+      <!-- confirm dialog -->
+      <dialog id="confirmDialog">
+        <form method="dialog">
+          <h2>Incomplete Workout</h2>
+
+          <p>
+            You haven't checked all exercises yet. Are you sure you want to
+            finish this workout?
+          </p>
+
+          <menu>
+            <button value="cancel">Continue workout</button>
+            <button id="confirmButton" value="confirm">
+              Yes, finish anyway
+            </button>
+          </menu>
+        </form>
+      </dialog>
+      <!-- success dialog -->
+      <dialog id="successDialog">
+        <form method="dialog">
+          <h2>Workout Finished!</h2>
+
+          <p class="success-dialog__feedback"></p>
+
+          <menu>
+            <button id="successButton" value="confirm">Back to workouts</button>
+          </menu>
+        </form>
+      </dialog>
+    </section>
+    <script type="module" src="/src/js/workoutController.js"></script>
+  </body>
+</html>
