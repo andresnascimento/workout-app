@@ -2,18 +2,22 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="stylesheet" href="/src/css/style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Workout exercises</title>
   </head>
   <body>
-    <button id="returnBtn">Go back</button>
+    <button class="btn btn-sm btn-text" id="returnBtn">
+      Back to workout list
+    </button>
     <section>
       <form id="workoutForm">
-        <legend class="workout-exercise-title"></legend>
-        <ul class="workout-exercises"></ul>
+        <legend class="js-exercise-title workout-exercise__title"></legend>
+        <p class="js-exercise-description workout-exercise__description"></p>
+        <section class="progress-indicator"></section>
+        <ul class="js-workout-exercises exercises__list"></ul>
         <button id="submitWorkout" disabled>Finish workout</button>
       </form>
-      <section class="progress-indicator"></section>
       <!-- confirm dialog -->
       <dialog id="confirmDialog">
         <form method="dialog">

@@ -1,7 +1,8 @@
 class WorkoutExerciseView {
   _workoutForm = document.querySelector("#workoutForm");
-  _exerciseList = document.querySelector(".workout-exercises");
-  _exercisePageTitle = document.querySelector(".workout-exercise-title");
+  _exerciseList = document.querySelector(".js-workout-exercises");
+  _exercisePageTitle = document.querySelector(".js-exercise-title");
+  _exerciseDescription = document.querySelector(".js-exercise-description");
   _successDialogTitle = document.querySelector(".success-dialog__feedback");
   _progressIndicator = document.querySelector(".progress-indicator");
 
@@ -18,23 +19,27 @@ class WorkoutExerciseView {
 
   _generateExerciseList(exercise) {
     return `
-        <li>
-            <label>
-            <input type="checkbox" name="exercise" value="${exercise.exercise}" />
-            ${exercise.exercise} — ${exercise.set}x${exercise.rep}
+        <li class="exercise__item">
+            <label class="u-flex">
+            <input class="exercise__check" type="checkbox" name="exercise" value="${exercise.exercise}" />
+                <div>
+                    <p class="exercise__name">${exercise.exercise}</p>
+                    <p class="exercise__info">${exercise.set}x${exercise.rep}</p>
+                </div>
             </label>
         </li>
 
     `;
   }
 
-  _generateTitle(title) {
+  _generateTitle(title, description) {
     this._exercisePageTitle.innerHTML = title;
+    this._exerciseDescription.innerHTML = description;
   }
 
   _generateProgressBar(progress = 0, workoutLength) {
-    const markup = `<p>${progress} de ${workoutLength} exercícios concluídos</p>
-      <progress value="${progress}" max="${workoutLength}"></progress>`;
+    const markup = ` <progress exercise__progress-bar value="${progress}" max="${workoutLength}"></progress>
+      <p class="exercise__progress-legend">${progress} de ${workoutLength} exercícios concluídos</p>`;
     this._progressIndicator.innerHTML = markup;
   }
 
@@ -47,7 +52,7 @@ class WorkoutExerciseView {
       this._exerciseList.insertAdjacentHTML("beforeend", markup);
     });
 
-    this._generateTitle(`Workout ${data[0].workout}`);
+    this._generateTitle(`Workout ${data[0].workout}`, `${data[0].description}`);
     this._generateProgressBar(0, data.length);
   }
 

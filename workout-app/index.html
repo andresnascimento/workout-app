@@ -2,29 +2,27 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="stylesheet" href="/src/css/style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Workout Plan</title>
   </head>
   <body>
-    <header class="app-header">
-      <img
-        src="/workout-app/src/img/avatar.png"
-        alt="Andre's profile picture"
-        class="app-avatar"
-      />
-      <h1>Welcome André</h1>
+    <header class="app__header u-flex">
+      <figure class="app__avatar">
+        <img src="/src/img/avatar.png" alt="Andre's profile picture" />
+      </figure>
+      <h1 class="app__title">Welcome André</h1>
     </header>
-    <main>
-      <section>
-        <h2>Feb, 28</h2>
-        <ul>
-          <li>Today's workout</li>
-          <li><a href="#">see all workouts</a></li>
+    <main class="app__content">
+      <section class="workout-info">
+        <time class="workout-info__date">Feb, 28</time>
+        <ul class="workout-info__list-container u-flex u-space-between">
+          <li class="workout-info__title">Today's workout:</li>
+          <!-- <li><a class="workout-info__link" href="#">see all workouts</a></li> -->
         </ul>
       </section>
-      <section>
-        <ul class="workout-list"></ul>
+      <section class="workout__list">
+        <ul class="workout__list-container"></ul>
       </section>
     </main>
     <script type="module" src="/src/js/controller.js"></script>

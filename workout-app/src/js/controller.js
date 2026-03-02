@@ -9,6 +9,7 @@ const controlWorkoutList = async function () {
 
   // render list
   workoutListView.render(workoutData);
+  workoutListView.addWorkoutSelectHandler();
 };
 
 const init = function () {
