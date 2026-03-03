@@ -3,48 +3,76 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="/src/css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Workout exercises</title>
   </head>
   <body>
-    <button class="btn btn-sm btn-text" id="returnBtn">
-      Back to workout list
+    <button class="btn btn-sm btn-text btn-text-primary u-flex" id="returnBtn">
+      <span class="material-symbols-outlined btn-icon"> arrow_back </span>Back
+      to workout list
     </button>
     <section>
-      <form id="workoutForm">
+      <form id="workoutForm" class="workout-form">
         <legend class="js-exercise-title workout-exercise__title"></legend>
         <p class="js-exercise-description workout-exercise__description"></p>
         <section class="progress-indicator"></section>
         <ul class="js-workout-exercises exercises__list"></ul>
-        <button id="submitWorkout" disabled>Finish workout</button>
+        <button
+          id="submitWorkout"
+          class="btn btn-lg btn-secondary btn-submit-workout"
+          disabled
+        >
+          Finish workout
+        </button>
       </form>
       <!-- confirm dialog -->
-      <dialog id="confirmDialog">
+      <dialog id="confirmDialog" class="dialog dialog__confirm">
         <form method="dialog">
-          <h2>Incomplete Workout</h2>
+          <h2 class="dialog__title">Incomplete Workout</h2>
 
-          <p>
+          <p class="dialog__subtitle">
             You haven't checked all exercises yet. Are you sure you want to
             finish this workout?
           </p>
 
-          <menu>
-            <button value="cancel">Continue workout</button>
-            <button id="confirmButton" value="confirm">
+          <menu class="dialog__footer">
+            <button
+              class="btn btn-md btn-secondary"
+              id="confirmButton"
+              value="confirm"
+            >
               Yes, finish anyway
+            </button>
+            <button class="btn btn-text btn-text-primary btn-md" value="cancel">
+              Cancel
             </button>
           </menu>
         </form>
       </dialog>
       <!-- success dialog -->
-      <dialog id="successDialog">
+      <dialog id="successDialog" class="dialog dialog__success">
         <form method="dialog">
-          <h2>Workout Finished!</h2>
+          <figure class="dialog__success-image">
+            <img src="/src/img/workout-success-1.gif" alt="" />
+          </figure>
+          <h2 class="dialog__success-title js-dialog__success-title">
+            Workout Finished!
+          </h2>
 
-          <p class="success-dialog__feedback"></p>
+          <!-- <p class="success-dialog__feedback"></p> -->
 
-          <menu>
-            <button id="successButton" value="confirm">Back to workouts</button>
+          <menu class="dialog__footer">
+            <button
+              class="btn btn-lg btn-secondary"
+              id="successButton"
+              value="confirm"
+            >
+              Back to Workouts
+            </button>
           </menu>
         </form>
       </dialog>
