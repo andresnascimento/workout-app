@@ -3,7 +3,7 @@ class WorkoutExerciseView {
   _exerciseList = document.querySelector(".js-workout-exercises");
   _exercisePageTitle = document.querySelector(".js-exercise-title");
   _exerciseDescription = document.querySelector(".js-exercise-description");
-  _successDialogTitle = document.querySelector(".success-dialog__feedback");
+  _successDialogTitle = document.querySelector(".js-dialog__success-title");
   _progressIndicator = document.querySelector(".progress-indicator");
 
   _returnBtn = document.querySelector("#returnBtn");
@@ -20,9 +20,10 @@ class WorkoutExerciseView {
   _generateExerciseList(exercise) {
     return `
         <li class="exercise__item">
-            <label class="u-flex">
-            <input class="exercise__check" type="checkbox" name="exercise" value="${exercise.exercise}" />
-                <div>
+            <label class="u-flex exercise__item-checkbox">
+                <input class="exercise__check" type="checkbox" name="exercise" value="${exercise.exercise}" />
+                <span class="checkbox__box"></span>
+                <div class="exercise__content-container">
                     <p class="exercise__name">${exercise.exercise}</p>
                     <p class="exercise__info">${exercise.set}x${exercise.rep}</p>
                 </div>
@@ -57,7 +58,7 @@ class WorkoutExerciseView {
   }
 
   _finishWorkout(workoutLength, workoutType) {
-    this._successDialogTitle.innerHTML = `You completed Workout ${workoutType}`;
+    this._successDialogTitle.innerHTML = `Workout ${workoutType} finished!`;
     // check if all the exercises are finished
     workoutLength === this._finishedExercises.length
       ? this._successDialog.showModal()
