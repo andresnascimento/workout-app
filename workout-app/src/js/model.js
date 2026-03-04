@@ -3,22 +3,30 @@ import { workoutURL } from "./config";
 
 export const state = {
   workouts: [],
-  selectedWorkout: null,
+  latestWorkout: "",
+};
+
+export const setLatestWorkout = function (workout) {
+  state.latestWorkout = workout;
+  localStorage.setItem("latestWorkout", workout);
 };
 
 export const fetchWorkoutPlan = async function () {
   try {
-    // check if there is data on local storage
-    const storage = sessionStorage.getItem("workoutPlan");
+    const workoutStorage = localStorage.getItem("workoutPlan");
+    const latestWorkoutStorage = localStorage.getItem("latestWorkout");
 
-    if (storage) {
-      state.workouts = JSON.parse(storage);
+    // check local storage for latest workout
+    if (latestWorkoutStorage) state.latestWorkout = latestWorkoutStorage;
+
+    // check storage for workouts
+    if (workoutStorage) {
+      state.workouts = JSON.parse(workoutStorage);
       return;
     }
 
     // fetch raw data
     const rawData = await getJSON(workoutURL);
-    console.log("fetched data");
     // get keys and values from rawData
     const objKeys = rawData.values[0];
     const objValues = rawData.values.slice(1);
@@ -33,7 +41,8 @@ export const fetchWorkoutPlan = async function () {
       Object.groupBy(workoutObjArr, (item) => item.workout),
     );
     state.workouts = workoutPlan;
-    sessionStorage.setItem("workoutPlan", JSON.stringify(workoutPlan));
+    localStorage.setItem("workoutPlan", JSON.stringify(workoutPlan));
+
     //return workoutPlan;
   } catch (error) {
     console.log(error.message);

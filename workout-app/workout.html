@@ -32,6 +32,9 @@
       <!-- confirm dialog -->
       <dialog id="confirmDialog" class="dialog dialog__confirm">
         <form method="dialog">
+          <figure class="dialog__confirm-image">
+            <img src="/src/img/confirm.gif" alt="" />
+          </figure>
           <h2 class="dialog__title">Incomplete Workout</h2>
 
           <p class="dialog__subtitle">
@@ -39,16 +42,16 @@
             finish this workout?
           </p>
 
-          <menu class="dialog__footer">
+          <menu class="dialog__footer u-flex">
+            <button class="btn btn-md bnt-primary" value="cancel">
+              Cancel
+            </button>
             <button
               class="btn btn-md btn-secondary"
               id="confirmButton"
               value="confirm"
             >
               Yes, finish anyway
-            </button>
-            <button class="btn btn-text btn-text-primary btn-md" value="cancel">
-              Cancel
             </button>
           </menu>
         </form>

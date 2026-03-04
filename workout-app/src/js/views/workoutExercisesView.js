@@ -14,9 +14,6 @@ class WorkoutExerciseView {
   _confirmDialog = document.querySelector("#confirmDialog");
   _successDialog = document.querySelector("#successDialog");
 
-  _progressIndicatorCounter = 0;
-  _finishedExercises = [];
-
   _generateExerciseList(exercise) {
     return `
         <li class="exercise__item">
@@ -49,57 +46,47 @@ class WorkoutExerciseView {
 
     data.forEach((el) => {
       const markup = this._generateExerciseList(el);
-
       this._exerciseList.insertAdjacentHTML("beforeend", markup);
     });
 
     this._generateTitle(`Workout ${data[0].workout}`, `${data[0].description}`);
     this._generateProgressBar(0, data.length);
-  }
-
-  _finishWorkout(workoutLength, workoutType) {
-    this._successDialogTitle.innerHTML = `Workout ${workoutType} finished!`;
-    // check if all the exercises are finished
-    workoutLength === this._finishedExercises.length
-      ? this._successDialog.showModal()
-      : this._confirmDialog.showModal();
-
-    // add logic for success
-
-    // back to workout list (IMPROVE LATER)
-    this._successDialogBtn.addEventListener("click", () => history.back());
-    this._confirmWorkoutBtn.addEventListener("click", () => {
-      this._successDialog.showModal();
-    });
+    this._successDialogTitle.innerHTML = `Workout ${data[0].workout} Finished!`;
   }
 
   // HANDLERS
-  addHandlerCheckbox(workoutLength) {
+  addHandlerCheckbox(handler) {
     this._exerciseList.addEventListener("change", (e) => {
-      const exerciseArr = this._finishedExercises;
-      const value = e.target.value;
-
-      // temporally saves finished exercises
-      exerciseArr.includes(value)
-        ? exerciseArr.splice(exerciseArr.indexOf(value), 1)
-        : exerciseArr.push(value);
-
-      // changes progress indicator
-      this._generateProgressBar(exerciseArr.length, workoutLength);
-
-      // enable submit button
-      this._submitWorkoutBtn.disabled = exerciseArr.length > 0 ? false : true;
+      handler(e.target.value);
     });
+  }
+
+  updateProgressBar(exerciseArr, workoutLength) {
+    this._generateProgressBar(exerciseArr.length, workoutLength);
+  }
+
+  enableSubmitButton(exerciseArr) {
+    this._submitWorkoutBtn.disabled = exerciseArr.length > 0 ? false : true;
   }
 
   addReturnButtonHandler() {
     this._returnBtn.addEventListener("click", () => history.back());
   }
-  addSubmitButtonHandler(workoutLength, workoutType) {
-    // opens confirmation modal
+
+  openDialog(type) {
+    if (type === "feedback") this._confirmDialog.showModal();
+    if (type === "success") this._successDialog.showModal();
+  }
+  addSubmitButtonHandler(handler) {
     this._workoutForm.addEventListener("submit", (e) => {
       e.preventDefault();
-      this._finishWorkout(workoutLength, workoutType);
+
+      this._successDialogBtn.addEventListener("click", () => history.back());
+      this._confirmWorkoutBtn.addEventListener("click", () => {
+        this._successDialog.showModal();
+      });
+
+      handler();
     });
   }
 }
