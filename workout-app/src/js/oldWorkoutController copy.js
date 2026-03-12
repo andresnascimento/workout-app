@@ -4,17 +4,6 @@ import exercises from "./api/exercises.js";
 let currentWorkoutData = null;
 const checkedExercises = [];
 
-async function controlExerciseList() {
-  try {
-    const params = new URLSearchParams(window.location.search);
-    const workoutId = params.get("id");
-    const exerciseList = await exercises.getExercises(workoutId);
-    workoutExercisesView.render(exerciseList);
-  } catch (error) {
-    console.error("Controller error:", error);
-  }
-}
-
 const filterSelectedWorkout = async function () {
   // filter the workout based on url id and updates the currentWorkoutData obj
 
@@ -66,9 +55,8 @@ const controlSubmitWorkout = function () {
 };
 
 const init = async function () {
-  await controlExerciseList();
-  // await filterSelectedWorkout();
-  // workoutExercisesView.render(currentWorkoutData.selectedWorkout[0]);
+  await filterSelectedWorkout();
+  workoutExercisesView.render(currentWorkoutData.selectedWorkout[0]);
   workoutExercisesView.addHandlerCheckbox(controlCheckbox);
   workoutExercisesView.addSubmitButtonHandler(controlSubmitWorkout);
   workoutExercisesView.addReturnButtonHandler();

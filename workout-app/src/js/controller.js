@@ -1,26 +1,23 @@
 import * as model from "./model";
 import workoutListView from "./views/workoutListView";
+import workout from "./api/workouts.js";
 
 const controlWorkoutList = async function () {
-  // if local storage is empty, fetch from API
-  await model.fetchWorkoutPlan();
-  const workoutData = model.state.workouts;
-  const latestWorkout = model.state.latestWorkout;
-  const orderedData = workoutListView._rotateWorkout(
-    workoutData,
-    latestWorkout,
-  );
-  // console.log(latestWorkout);
-  // console.log("workout data:", workoutData);
+  try {
+    const workoutSup = await workout.getWorkoutData();
+    console.log(workoutSup);
 
-  // render list
-  workoutListView.render(orderedData, latestWorkout);
-  workoutListView.addWorkoutSelectHandler();
+    workoutListView.render(workoutSup);
+    workoutListView.addWorkoutSelectHandler();
+  } catch (error) {
+    console.error("Controller error:", error);
+  }
 };
 
-const init = function () {
-  controlWorkoutList();
+async function init() {
   workoutListView.setCurrentDate();
-};
+  controlWorkoutList();
+  // workoutListView.setCurrentDate();
+}
 
 init();

@@ -14,25 +14,24 @@ class WorkoutExerciseView {
   _confirmDialog = document.querySelector("#confirmDialog");
   _successDialog = document.querySelector("#successDialog");
 
+  _selectedExercise;
+  _selectedWorkoutName;
+  _selectedWorkoutTitle;
+
   _generateExerciseList(exercise) {
     return `
-        <li class="exercise__item">
+        <li data-exercise-id="${exercise.id}" class="exercise__item">
             <label class="u-flex exercise__item-checkbox">
-                <input class="exercise__check" type="checkbox" name="exercise" value="${exercise.exercise}" />
+                <input class="exercise__check" type="checkbox" name="${exercise.exercise}" value="${exercise.exercise}" />
                 <span class="checkbox__box"></span>
                 <div class="exercise__content-container">
                     <p class="exercise__name">${exercise.exercise}</p>
-                    <p class="exercise__info">${exercise.set}x${exercise.rep}</p>
+                    <p class="exercise__info">${exercise.sets}x${exercise.reps} | ${exercise.rest} rest</p>
                 </div>
             </label>
         </li>
 
     `;
-  }
-
-  _generateTitle(title, description) {
-    this._exercisePageTitle.innerHTML = title;
-    this._exerciseDescription.innerHTML = description;
   }
 
   _generateProgressBar(progress = 0, workoutLength) {
@@ -42,16 +41,20 @@ class WorkoutExerciseView {
   }
 
   render(data) {
-    if (data.length === 0) return;
+    this._selectedExercise = data.exercises;
 
-    data.forEach((el) => {
+    if (this._selectedExercise.length === 0) return;
+
+    this._selectedExercise.forEach((el) => {
       const markup = this._generateExerciseList(el);
       this._exerciseList.insertAdjacentHTML("beforeend", markup);
     });
 
-    this._generateTitle(`Workout ${data[0].workout}`, `${data[0].description}`);
-    this._generateProgressBar(0, data.length);
-    this._successDialogTitle.innerHTML = `Workout ${data[0].workout} Finished!`;
+    this._exercisePageTitle.innerHTML = `Workout ${data.name}`;
+    this._exerciseDescription.innerHTML = data.title;
+    this._successDialogTitle.innerHTML = `Workout ${data.name} Finished!`;
+
+    this._generateProgressBar(0, this._selectedExercise.length);
   }
 
   // HANDLERS
