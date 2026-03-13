@@ -37,7 +37,7 @@ class WorkoutListView extends View {
   }
 
   renderProfile(userProfile) {
-    this._userAvatar.innerHTML = `<img src="/src/img/${userProfile.avatar}" alt="${userProfile.name}'s profile picture" />`;
+    this._userAvatar.innerHTML = `<img src="/images/${userProfile.avatar}" alt="${userProfile.name}'s profile picture" />`;
     this._userName.textContent = `Welcome ${userProfile.name}`;
   }
 
