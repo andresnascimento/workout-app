@@ -8,6 +8,7 @@
   --surface-2: #1e1e2a;
   --surface-3: #252534;
   --surface-4: #2e2e40;
+  --surface-5: #44445f;
 
   /* ── Typography ── */
   --text-primary: #f0f0fa;
@@ -28,35 +29,52 @@
   --color-secondary--300: #cfd6fc;
   --color-success: #49ec46;
 
-  --radius-xs: 0.5rem;
-  --radius-sm: 0.75rem;
-  --radius-md: 1rem;
-  --radius-lg: 1.5rem;
+  /*  Border Radius  */
+  --radius-xs: 0.5rem; /* 8px */
+  --radius-sm: 0.75rem; /* 12px */
+  --radius-md: 1rem; /* 16px */
+  --radius-lg: 1.5rem; /* 24px */
   --radius-XXG: 50%;
+  /*  Typography  */
+  --font-sans: "Big Shoulders", sans-serif;
+  /*  Font Sizes  */
+  --text-xs: 0.75rem; /* 12px */
+  --text-sm: 0.875rem; /* 14px */
+  --text-base: 1rem; /* 16px */
+  --text-md: 1.125rem; /* 18px */
+  --text-lg: 1.25rem; /* 20px  */
+  --text-xl: 1.5rem; /* 24px  */
+  --text-2xl: 1.875rem; /* 30px  */
+  --text-3xl: 2.5rem; /* 36px  */
+  --text-4xl: 3rem; /* 48px   */
+  --text-5xl: 3.75rem; /* 60px  */
+  --text-6xl: 4.188rem; /* 72px  */
 
-  --spacing-xxs: 0.25rem;
-  --spacing-xs: 0.5rem;
-  --spacing-sm: 0.625rem;
-  --spacing-md: 1rem;
-  --spacing-lg: 1.5rem;
-  --spacing-xg: 1.5rem;
+  /* Spacing */
 
-  --font-size-title--lg: 4.188rem;
-  --font-size-title--md: 2.5rem;
-  --font-size-title--sm: 1.5rem;
-
-  --font-size-body--lg: 1.125rem;
-  --font-size-body--md: 1rem;
-  --font-size-body--sm: 0.875rem;
+  --space-0: 0rem; /* 0px  */
+  --space-1: 0.25rem; /* 4px  */
+  --space-2: 0.5rem; /* 8px  */
+  --space-3: 0.75rem; /* 12px */
+  --space-4: 1rem; /* 16px — base unit */
+  --space-5: 1.25rem; /* 20px */
+  --space-6: 1.5rem; /* 24px */
+  --space-8: 2rem; /* 32px */
+  --space-10: 2.5rem; /* 40px */
+  --space-12: 3rem; /* 48px */
+  --space-16: 4rem; /* 64px */
+  --space-20: 5rem; /* 80px */
+  --space-24: 6rem; /* 96px */
+  --space-32: 8rem; /* 128px */
 }
 
 body {
-  font-family: "Big Shoulders", sans-serif;
+  font-family: var(--font-sans);
   font-optical-sizing: auto;
   color: var(--text-primary);
   background-color: var(--base);
   /* padding: 1.25rem; */
-  margin: var(--spacing-md);
+  margin: var(--space-4);
   letter-spacing: 4%;
 }
 ul {
@@ -73,7 +91,55 @@ p {
   margin: 0;
 }
 
+/* INPUTS */
+
+input {
+  font-size: var(--text-base);
+  width: 100%;
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  border: 1px solid var(--surface-5);
+  background-color: var(--surface-4);
+  border-radius: var(--radius-xs);
+  margin: var(--space-2) 0;
+  outline: none;
+  padding: var(--space-3);
+  box-sizing: border-box;
+  transition: 0.3s;
+}
+
+input:focus {
+  border-color: var(--brand-secondary-muted);
+  box-shadow: 0 0 4px 0 var(--brand-secondary-glow);
+}
+
+input:disabled {
+  background-color: var(--gray-200);
+  cursor: not-allowed;
+}
+
+label {
+  color: var(--text-secondary);
+  font-size: 16px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
 /* UTILITIES */
+.u-grid {
+  display: grid;
+}
 .u-flex {
   display: flex;
   align-items: center;
@@ -81,9 +147,34 @@ p {
 .u-center {
   justify-content: center;
 }
+.u-items-center {
+  align-items: center;
+}
 
 .u-space-between {
   justify-content: space-between;
+}
+.gap-4 {
+  gap: var(--space-1);
+}
+.gap-8 {
+  gap: var(--space-2);
+}
+
+.gap-12 {
+  gap: var(--space-3);
+}
+
+.gap-16 {
+  gap: var(--space-4);
+}
+
+.gap-24 {
+  gap: var(--space-6);
+}
+
+.gap-32 {
+  gap: var(--space-8);
 }
 
 /* Buttons */
@@ -98,32 +189,34 @@ p {
   gap: 0.5rem;
   letter-spacing: 4%;
 }
-
+.btn:hover {
+  cursor: pointer;
+}
 .btn:disabled {
   opacity: 0.2;
 }
 
 .btn-md {
-  font-size: var(--font-size-body--md);
+  font-size: var(--text-base);
   padding: 0.5rem 1rem;
   letter-spacing: 4%;
   font-weight: 600;
 }
 .btn-md:has(.btn-icon) .btn-icon {
-  font-size: var(--font-size-body--lg);
+  font-size: var(--text-md);
 }
 .btn-sm {
-  font-size: var(--font-size-body--sm);
-  padding: var(--spacing-xs);
+  font-size: var(--text-sm);
+  padding: var(--space-2);
 }
 .btn-sm:has(.btn-icon) .btn-icon {
-  font-size: var(--font-size-body--md);
+  font-size: var(--text-base);
 }
 
 .btn-lg {
-  font-size: var(--font-size-title--sm);
-  padding-top: var(--spacing-xg);
-  padding-bottom: var(--spacing-xg);
+  font-size: var(--text-xl);
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-6);
   font-weight: 700;
 }
 .btn-secondary {
@@ -162,21 +255,27 @@ p {
 
 /* Workout list page info */
 .app__title {
-  font-size: var(--font-size-body--md);
+  font-size: var(--text-base);
   font-weight: 600;
+  width: 100%;
 }
 
 .app__header {
-  gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-lg);
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+
+.app__header .btn {
+  background-color: var(--surface-3);
+  color: var(--text-primary);
 }
 
 .workout-info__date {
-  font-size: var(--font-size-title--lg);
+  font-size: var(--text-6xl);
   font-weight: 700;
 }
 .workout-info__list-container {
-  font-size: var(--font-size-body--lg);
+  font-size: var(--text-md);
 }
 .workout-info__title {
   color: var(--text-secondary);
@@ -187,24 +286,24 @@ p {
 .workout__loading {
   text-align: center;
   color: var(--text-tertiary);
-  padding: var(--spacing-lg);
-  font-size: var(--font-size-body--sm);
+  padding: var(--space-6);
+  font-size: var(--text-sm);
 }
 /* Workout cards */
 .workout-card {
   background-color: var(--surface-2);
-  padding: var(--spacing-md);
+  padding: var(--space-4);
   border: 1px solid var(--surface-4);
   border-radius: var(--radius-md);
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--space-6);
   gap: 2rem;
   align-items: flex-start;
 }
 .workout-card__title {
-  font-size: var(--font-size-title--sm);
+  font-size: var(--text-xl);
   margin: 0;
   font-weight: 700;
-  padding-bottom: var(--spacing-md);
+  padding-bottom: var(--space-4);
 }
 .workout-card:has(.btn) .btn {
   width: 100%;
@@ -244,7 +343,7 @@ p {
 
 /* EXERCISES LIST  */
 .workout-exercise__title {
-  font-size: var(--font-size-title--md);
+  font-size: var(--text-3xl);
   font-weight: 700;
   margin: 0;
   padding: 0;
@@ -252,14 +351,14 @@ p {
 
 .workout-exercise__description {
   margin: 0;
-  font-size: var(--font-size-title--sm);
+  font-size: var(--text-xl);
 }
 
 .exercise__progress-legend {
-  font-size: var(--font-size-body--md);
+  font-size: var(--text-base);
   margin: 0;
   color: var(--text-secondary);
-  padding-top: var(--spacing-sm);
+  padding-top: var(--space-3);
 }
 
 progress {
@@ -292,7 +391,7 @@ progress::-webkit-progress-value {
   border-top-left-radius: var(--radius-lg);
   border-top-right-radius: var(--radius-lg);
   margin-bottom: 0;
-  margin-top: var(--spacing-lg);
+  margin-top: var(--space-6);
 }
 
 .exercise__item {
@@ -301,23 +400,23 @@ progress::-webkit-progress-value {
 }
 
 .exercise__name {
-  font-size: var(--font-size-title--sm);
+  font-size: var(--text-xl);
   margin: 0;
-  padding-bottom: var(--spacing-xxs);
+  padding-bottom: var(--space-1);
 }
 .exercise__info {
   margin: 0;
-  font-size: var(--font-size-body--lg);
+  font-size: var(--text-md);
   color: var(--text-secondary);
 }
 
 .workout-form {
-  margin-top: var(--spacing-md);
+  margin-top: var(--space-4);
 }
 
 /* checkbox */
 .exercise__item-checkbox {
-  gap: var(--spacing-md);
+  gap: var(--space-4);
 }
 .exercise__item-checkbox input {
   position: absolute;
@@ -389,7 +488,7 @@ progress::-webkit-progress-value {
 
 .dialog {
   border: none;
-  padding: var(--spacing-lg);
+  padding: var(--space-6);
   width: 100%;
   inset: auto 0 0 0;
   opacity: 0;
@@ -414,8 +513,8 @@ progress::-webkit-progress-value {
 
 .dialog__footer {
   padding: 0;
-  margin-top: var(--spacing-md);
-  gap: var(--spacing-md);
+  margin-top: var(--space-4);
+  gap: var(--space-4);
 }
 
 .dialog__footer .btn {
@@ -423,7 +522,7 @@ progress::-webkit-progress-value {
 }
 
 .dialog__title {
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: var(--space-3);
 }
 
 .dialog__success {
@@ -441,9 +540,9 @@ progress::-webkit-progress-value {
 }
 .dialog__success-image,
 .dialog__confirm-image {
-  margin-bottom: var(--spacing-md);
-  padding: 0 var(--spacing-md);
-  margin-top: var(--spacing-md);
+  margin-bottom: var(--space-4);
+  padding: 0 var(--space-4);
+  margin-top: var(--space-4);
 }
 
 .dialog__success-image img,
@@ -454,6 +553,35 @@ progress::-webkit-progress-value {
 }
 
 .dialog__success-title {
-  font-size: var(--font-size-title--md);
-  padding: 0 var(--spacing-md);
+  font-size: var(--text-3xl);
+  padding: 0 var(--space-4);
+}
+
+/* FORM */
+
+.form-field {
+  margin-bottom: var(--space-4);
+}
+.btn-login {
+  width: 100%;
+  padding-top: var(--space-3);
+  padding-bottom: var(--space-3);
+}
+
+.signup-button-container {
+  margin-top: var(--space-6);
+}
+
+.btn-signup {
+  color: var(--brand-secondary);
+  background-color: var(--brand-secondary-muted);
+}
+.btn-signup:hover {
+  background-color: var(--surface-3);
+}
+
+.app__signup .btn-lg {
+  width: 100%;
+  padding-top: var(--space-3);
+  padding-bottom: var(--space-3);
 }

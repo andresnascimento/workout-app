@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Workout App</title>
+  </head>
+  <body>
+    <header class="login__header">
+      <h1>Login</h1>
+    </header>
+    <main class="app__content">
+      <form class="js-login__form">
+        <div class="login__form-content">
+          <div class="form-field">
+            <label for="userEmail">Email</label>
+            <input id="userEmail" name="userEmail" type="text" required />
+          </div>
+
+          <div class="form-field">
+            <label for="userPassword">Password</label>
+            <input id="userPassword" name="userPassword" type="text" required />
+          </div>
+        </div>
+        <button id="userLogin" class="btn btn-lg btn-secondary btn-login">
+          Login
+        </button>
+      </form>
+      <p class="signup-button-container"></p>
+        Don't have an account?
+        <button id="newUser" class="btn btn-sm btn-signup">Signup</button>
+      </p>
+    </main>
+    <script type="module" src="/src/js/loginController.js"></script>
+  </body>
+</html>

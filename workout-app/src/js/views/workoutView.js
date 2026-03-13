@@ -2,6 +2,9 @@ import View from "./view";
 class WorkoutListView extends View {
   _workoutList = document.querySelector(".workout__list-container");
   _currentDate = document.querySelector(".js-current-date");
+  _logoutBtn = document.querySelector(".js-btn-logout");
+  _userAvatar = document.querySelector(".app__avatar");
+  _userName = document.querySelector(".app__title");
   _workouts;
   _lastWorkout;
 
@@ -33,6 +36,11 @@ class WorkoutListView extends View {
     ];
   }
 
+  renderProfile(userProfile) {
+    this._userAvatar.innerHTML = `<img src="/src/img/${userProfile.avatar}" alt="${userProfile.name}'s profile picture" />`;
+    this._userName.textContent = `Welcome ${userProfile.name}`;
+  }
+
   setCurrentDate() {
     const date = new Date();
     const formatted = new Intl.DateTimeFormat("en-US", {
@@ -61,6 +69,12 @@ class WorkoutListView extends View {
   renderSpinner() {
     this._workoutList.innerHTML = "";
     this.renderLoading(this._workoutList);
+  }
+  logoutHandler(handler) {
+    this._logoutBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      handler();
+    });
   }
 
   addWorkoutSelectHandler() {

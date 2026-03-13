@@ -1,40 +1,18 @@
 import { supabase } from "../services/supabase.js";
 
-async function getWorkoutData() {
+async function getProfile() {
   const { data: userData } = await supabase.auth.getUser();
+
   const { data, error } = await supabase
-    .from("user_state")
-    .select(
-      `
-      last_workout_id,
-      workouts (
-        id,
-        name,
-        title,
-        order_index
-      )
-    `,
-    )
+    .from("profiles")
+    .select("*")
+    .eq("id", userData.user.id)
     .single();
 
-  if (error) {
-    console.error("Error on getting workout data", error.message);
-    throw new Error(error.message);
-  }
-
-  const { data: workouts } = await supabase
-    .from("workouts")
-    .select("*")
-    .eq("user_id", userData.user.id)
-    .order("order_index");
-
-  return {
-    lastWorkout: data.workouts,
-    workouts,
-  };
+  return data;
 }
 
-export default { getWorkoutData };
+export default { getProfile };
 
 // The following query gets the workout in the order based on the last workout id
 // try this in the future as a possible performance improvement:

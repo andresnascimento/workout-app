@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Workout App</title>
+  </head>
+  <body>
+    <header class="login__header u-flex gap-8 u-items-center">
+      <button type="button" id="cancelRegister" class="btn btn-sm">
+        <span class="material-symbols-outlined"> arrow_back </span>
+      </button>
+      <h1>Signup</h1>
+    </header>
+    <main class="app__signup">
+      <form class="js-register__form">
+        <div class="register__form-content">
+          <div class="form-field">
+            <label for="registerEmail">Email</label>
+            <input
+              id="registerEmail"
+              name="registerEmail"
+              type="text"
+              required
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="registerPassword">Password</label>
+            <input
+              id="registerPassword"
+              name="registerPassword"
+              type="text"
+              required
+            />
+          </div>
+        </div>
+        <!-- <button id="cancelRegister" class="btn btn-lg">Cancel</button> -->
+        <button id="registerUser" class="btn btn-lg btn-secondary">
+          Create
+        </button>
+      </form>
+    </main>
+    <script type="module" src="/src/js/signUpController.js"></script>
+  </body>
+</html>
