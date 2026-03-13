@@ -152,6 +152,9 @@ p {
   background-color: var(--brand-secondary-hover);
   cursor: pointer;
 }
+.btn-secondary:focus {
+  background-color: var(--brand-secondary);
+}
 .btn-text:hover {
   background-color: var(--surface-4);
   cursor: pointer;
@@ -181,7 +184,12 @@ p {
 .workout-info__link {
   color: var(--color-secondary--500);
 }
-
+.workout__loading {
+  text-align: center;
+  color: var(--text-tertiary);
+  padding: var(--spacing-lg);
+  font-size: var(--font-size-body--sm);
+}
 /* Workout cards */
 .workout-card {
   background-color: var(--surface-2);
@@ -382,21 +390,26 @@ progress::-webkit-progress-value {
 .dialog {
   border: none;
   padding: var(--spacing-lg);
-
-  max-width: 600px;
+  width: 100%;
   inset: auto 0 0 0;
-
   opacity: 0;
   border-radius: 1rem 1rem 0 0;
   background: var(--surface-2);
   color: var(--text-primary);
-
   transform: translateY(100%);
-  transition: transform 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    opacity 0.4s ease,
+    transform 0.4s ease;
+  margin: 0;
 }
-.dialog[open] {
+.dialog.dialog-open {
   transform: translateY(0);
   opacity: 1;
+}
+.dialog.dialog-closing {
+  transform: translateY(100%);
+  opacity: 0;
 }
 
 .dialog__footer {

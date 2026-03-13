@@ -29,57 +29,55 @@
           Finish workout
         </button>
       </form>
-      <!-- confirm dialog -->
-      <dialog id="confirmDialog" class="dialog dialog__confirm">
-        <form method="dialog">
-          <figure class="dialog__confirm-image">
-            <img src="/src/img/confirm.gif" alt="" />
-          </figure>
-          <h2 class="dialog__title">Incomplete Workout</h2>
-
-          <p class="dialog__subtitle">
-            You haven't checked all exercises yet. Are you sure you want to
-            finish this workout?
-          </p>
-
-          <menu class="dialog__footer u-flex">
-            <button class="btn btn-md bnt-primary" value="cancel">
-              Cancel
-            </button>
-            <button
-              class="btn btn-md btn-secondary"
-              id="confirmButton"
-              value="confirm"
-            >
-              Yes, finish anyway
-            </button>
-          </menu>
-        </form>
-      </dialog>
-      <!-- success dialog -->
-      <dialog id="successDialog" class="dialog dialog__success">
-        <form method="dialog">
-          <figure class="dialog__success-image">
-            <img src="/src/img/workout-success-1.gif" alt="" />
-          </figure>
-          <h2 class="dialog__success-title js-dialog__success-title">
-            Workout Finished!
-          </h2>
-
-          <!-- <p class="success-dialog__feedback"></p> -->
-
-          <menu class="dialog__footer">
-            <button
-              class="btn btn-lg btn-secondary"
-              id="successButton"
-              value="confirm"
-            >
-              Back to Workouts
-            </button>
-          </menu>
-        </form>
-      </dialog>
     </section>
-    <script type="module" src="/src/js/workoutController.js"></script>
+    <!-- confirm dialog -->
+    <dialog id="confirmDialog" class="dialog dialog__confirm">
+      <form method="dialog">
+        <figure class="dialog__confirm-image">
+          <img src="/src/img/confirm.gif" alt="" />
+        </figure>
+        <h2 class="dialog__title">Incomplete Workout</h2>
+
+        <p class="dialog__subtitle">
+          You haven't checked all exercises yet. Are you sure you want to finish
+          this workout?
+        </p>
+
+        <menu class="dialog__footer u-flex">
+          <button class="btn btn-md bnt-primary" value="cancel">Cancel</button>
+          <button
+            class="btn btn-md btn-secondary"
+            id="confirmButton"
+            value="confirm"
+          >
+            Yes, finish anyway
+          </button>
+        </menu>
+      </form>
+    </dialog>
+    <!-- success dialog -->
+    <dialog id="successDialog" class="dialog dialog__success">
+      <form method="dialog">
+        <figure class="dialog__success-image">
+          <img src="/src/img/workout-success-1.gif" alt="" />
+        </figure>
+        <h2 class="dialog__success-title js-dialog__success-title">
+          Workout Finished!
+        </h2>
+
+        <!-- <p class="success-dialog__feedback"></p> -->
+
+        <menu class="dialog__footer">
+          <button
+            class="btn btn-lg btn-secondary"
+            id="successButton"
+            value="confirm"
+          >
+            Back to Workouts
+          </button>
+        </menu>
+      </form>
+    </dialog>
+    <script type="module" src="/src/js/exercisesController.js"></script>
   </body>
 </html>

@@ -1,4 +1,6 @@
-class WorkoutExerciseView {
+import View from "./view";
+
+class WorkoutExerciseView extends View {
   _workoutForm = document.querySelector("#workoutForm");
   _exerciseList = document.querySelector(".js-workout-exercises");
   _exercisePageTitle = document.querySelector(".js-exercise-title");
@@ -15,8 +17,9 @@ class WorkoutExerciseView {
   _successDialog = document.querySelector("#successDialog");
 
   _selectedExercise;
-  _selectedWorkoutName;
+  _selectedWorkoutId;
   _selectedWorkoutTitle;
+  _checkedExercises = [];
 
   _generateExerciseList(exercise) {
     return `
@@ -34,7 +37,7 @@ class WorkoutExerciseView {
     `;
   }
 
-  _generateProgressBar(progress = 0, workoutLength) {
+  _updateProgressBar(progress = 0, workoutLength) {
     const markup = ` <progress exercise__progress-bar value="${progress}" max="${workoutLength}"></progress>
       <p class="exercise__progress-legend">${progress} de ${workoutLength} exercícios concluídos</p>`;
     this._progressIndicator.innerHTML = markup;
@@ -42,9 +45,10 @@ class WorkoutExerciseView {
 
   render(data) {
     this._selectedExercise = data.exercises;
+    this._selectedWorkoutId = data.id;
 
     if (this._selectedExercise.length === 0) return;
-
+    this._exerciseList.innerHTML = "";
     this._selectedExercise.forEach((el) => {
       const markup = this._generateExerciseList(el);
       this._exerciseList.insertAdjacentHTML("beforeend", markup);
@@ -54,42 +58,76 @@ class WorkoutExerciseView {
     this._exerciseDescription.innerHTML = data.title;
     this._successDialogTitle.innerHTML = `Workout ${data.name} Finished!`;
 
-    this._generateProgressBar(0, this._selectedExercise.length);
+    this._updateProgressBar(0, this._selectedExercise.length);
+  }
+  renderSpinner() {
+    this._exerciseList.innerHTML = "";
+    this.renderLoading(this._exerciseList);
   }
 
   // HANDLERS
-  addHandlerCheckbox(handler) {
+  addHandlerCheckbox() {
     this._exerciseList.addEventListener("change", (e) => {
-      handler(e.target.value);
+      // array of checked exercises
+      const exerciseId = e.target.closest(".exercise__item").dataset.exerciseId;
+      if (this._checkedExercises.includes(exerciseId)) {
+        this._checkedExercises.splice(
+          this._checkedExercises.indexOf(exerciseId),
+          1,
+        );
+      } else {
+        this._checkedExercises.push(exerciseId);
+      }
+      // updates interface
+      this._submitWorkoutBtn.disabled =
+        this._checkedExercises.length > 0 ? false : true;
+
+      this._updateProgressBar(
+        this._checkedExercises.length,
+        this._selectedExercise.length,
+      );
     });
   }
 
-  updateProgressBar(exerciseArr, workoutLength) {
-    this._generateProgressBar(exerciseArr.length, workoutLength);
-  }
-
-  enableSubmitButton(exerciseArr) {
-    this._submitWorkoutBtn.disabled = exerciseArr.length > 0 ? false : true;
-  }
-
   addReturnButtonHandler() {
-    this._returnBtn.addEventListener("click", () => history.back());
+    // Future improvement: check if at least one exercise was checked
+    [this._successDialogBtn, this._returnBtn].forEach((e) =>
+      e.addEventListener("click", () => history.back()),
+    );
   }
 
-  openDialog(type) {
-    if (type === "feedback") this._confirmDialog.showModal();
-    if (type === "success") this._successDialog.showModal();
+  _showDialog(dialog) {
+    dialog.showModal();
+    requestAnimationFrame(() => dialog.classList.add("dialog-open"));
+
+    // add closing event for dialog's animation
+    const form = dialog.querySelector("form");
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      dialog.classList.remove("dialog-open");
+      dialog.classList.add("dialog-closing");
+
+      setTimeout(() => {
+        dialog.classList.remove("dialog-closing");
+        dialog.close();
+      }, 200);
+    });
   }
+
   addSubmitButtonHandler(handler) {
     this._workoutForm.addEventListener("submit", (e) => {
       e.preventDefault();
-
-      this._successDialogBtn.addEventListener("click", () => history.back());
-      this._confirmWorkoutBtn.addEventListener("click", () => {
-        this._successDialog.showModal();
-      });
-
-      handler();
+      if (this._checkedExercises.length === this._selectedExercise.length) {
+        this._showDialog(this._successDialog);
+        handler(this._selectedWorkoutId);
+      } else {
+        this._showDialog(this._confirmDialog);
+        this._confirmWorkoutBtn.addEventListener("click", () => {
+          handler(this._selectedWorkoutId);
+          this._showDialog(this._successDialog);
+        });
+      }
     });
   }
 }

@@ -27,8 +27,11 @@ async function saveLastWorkout(workoutId) {
     .from("user_state")
     .update({
       last_workout_id: workoutId,
+      updated_at: new Date().toISOString(),
     })
-    .eq("id", 1);
+    .eq("id", "5a71243d-89b4-4a35-ba45-270a28ba8850")
+    .select()
+    .single();
 }
 
 export default { getLastWorkout, saveLastWorkout };

@@ -1,4 +1,5 @@
-class WorkoutListView {
+import View from "./view";
+class WorkoutListView extends View {
   _workoutList = document.querySelector(".workout__list-container");
   _currentDate = document.querySelector(".js-current-date");
   _workouts;
@@ -49,15 +50,17 @@ class WorkoutListView {
     if (this._workouts.length === 0) return;
 
     const orderedWorkouts = this._orderWorkout();
-
+    this._workoutList.innerHTML = "";
     orderedWorkouts.forEach((e) => {
       const markup = this._generateListMarkup(e);
+      //this._workoutList.innerHTML = "";
       this._workoutList.insertAdjacentHTML("beforeend", markup);
     });
   }
 
-  renderSup(data) {
-    if (data.length === 0) return;
+  renderSpinner() {
+    this._workoutList.innerHTML = "";
+    this.renderLoading(this._workoutList);
   }
 
   addWorkoutSelectHandler() {
