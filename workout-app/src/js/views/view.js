@@ -24,7 +24,7 @@ export default class View {
       renderer: "svg",
       loop: true,
       autoplay: true,
-      path: "src/img/loading.json",
+      path: "/images/loading.json",
     });
   }
 
